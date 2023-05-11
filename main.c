@@ -1,0 +1,69 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+#include "product.h"
+
+int selectMenu(){
+    int menu;
+    printf("\n******* Dessert CAFE *******\n");
+    printf("1. 조회 \n");
+    printf("2. 추가 \n");
+    printf("3. 수정 \n");
+    printf("4. 삭제 \n");
+    printf("0. 종료 >> \n");
+    printf("번호 선택 : __");
+    scanf("%d", &menu);
+    
+    return menu;
+}
+int main(){
+    Dessert d[100];
+    int count = 0, index = 0, menu;
+
+    while (1){
+        menu = selectMenu();
+        if (menu == 0) break;
+        if (menu == 1){//조회
+            listDessert(d, index);
+        }
+        else if (menu == 2){//추가
+            addDessert(&d[index]);
+            count++;
+            index++;
+
+            qsort(d, index, sizeof(Dessert), compare);
+
+            printf("=> 추가됨!\n");
+        }
+        else if (menu == 3){
+            int num = selectDessert(d, index);
+            if(num < 0){
+                printf("=> 취소됨!\n");
+                continue;
+            }
+
+            updateDessert(&d[num]);
+
+            qsort(d, index, sizeof(Dessert), compare);
+        }
+        else if (menu == 4){
+
+            int num = selectDessert(d, index);
+            if(num < 0){
+                printf("=> 취소됨!\n");
+                continue;
+            }
+
+            int result = deleteDessert(&d[num]);
+            if(result == 0)
+                count--;
+        }
+        else{
+            printf("=> 다시 선택해주세요!\n");
+        }
+    }
+    printf("종료됨!\n");
+
+    return 0;
+}
