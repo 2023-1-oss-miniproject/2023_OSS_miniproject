@@ -4,6 +4,6 @@ TARGET = menu
 OBJECTS = main.c manager.o product.o
 all : $(TARGET)
 $(TARGET) : $(OBJECTS)
-        $(CC) $(CFLAGS) -o $@ $^
+	$(CC) $(CFLAGS) -o $@ $^
 clean:
-        rm *.o menu
+	rm *.o menu

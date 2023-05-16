@@ -9,13 +9,13 @@ int addDessert(Dessert *d){// *추가 사항(잘못된 입력에 대한 처리)*
     printf("\n");
     printf("디저트의 이름 : ");
     fgets(d->name, 100, stdin);
-    d->name[strlen(d->name) -1] = '\0';
+    d->name[strlen(d->name)-1] = '\0';
 
     printf("디저트의 가격 : ");
     scanf("%d", &d->price);
 
     getchar();  //버퍼 비우기
-    printf("디저트의 종류(0 : 음료, 1 : 케이크, 2 : 쿠키) : ");
+    printf("디저트의 종류 ( 음료 => '0' / 케이크 => '1' / 쿠키 => '2' ) : ");
     scanf("%d", &d->category);
 
     return 0;
@@ -25,13 +25,13 @@ void readDessert(Dessert d, int index){
         return;
 
     if(d.category == 0){//음료
-        printf("%d  %s   %s     %d\n", index+1, "음료",d.name, d.price);
+        printf("%d   %s   %s     %d\n", index+1, "음료",d.name, d.price);
     }
     else if(d.category == 1){//케이크
-        printf("%d  %s   %s     %d\n", index+1, "케이크", d.name, d.price);
+        printf("%d   %s   %s     %d\n", index+1, "케이크", d.name, d.price);
     }
     else{//쿠키
-        printf("%d  %s   %s     %d\n", index+1, "쿠키", d.name, d.price);
+        printf("%d   %s   %s     %d\n", index+1, "쿠키", d.name, d.price);
     }
 
 } //Read
@@ -95,8 +95,8 @@ int deleteDessert(Dessert *d){
 
 }  //Delete
 void listDessert(Dessert d[], int count){
-    printf("\nCategory  |   Name    | Price\n");
-    printf("===================================\n");
+    printf("\n No |  Category  |    Name    | Price\n");
+    printf("=========================================\n");
 
     for(int i = 0; i < count; i++){
         readDessert(d[i], i);
