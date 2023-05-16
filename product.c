@@ -25,20 +25,20 @@ void readDessert(Dessert d, int index){
         return;
 
     if(d.category == 0){//음료
-        printf("%d   %s   %s     %d\n", index+1, "음료",d.name, d.price);
+        printf("%-4d %10s      %-25s    %d\n", index+1, "음료",d.name, d.price);
     }
     else if(d.category == 1){//케이크
-        printf("%d   %s   %s     %d\n", index+1, "케이크", d.name, d.price);
+        printf("%-4d  %10s      %-25s    %d\n", index+1, "케이크", d.name, d.price);
     }
     else{//쿠키
-        printf("%d   %s   %s     %d\n", index+1, "쿠키", d.name, d.price);
+        printf("%-4d %10s      %-25s    %d\n", index+1, "쿠키", d.name, d.price);
     }
 
 } //Read
 int updateDessert(Dessert *d){
     int request;
 
-    char n_name[30] = "";
+    char n_name[100] = "";
     int n_price;
     int n_category;
 
@@ -95,7 +95,7 @@ int deleteDessert(Dessert *d){
 
 }  //Delete
 void listDessert(Dessert d[], int count){
-    printf("\n No |  Category  |    Name    | Price\n");
+    printf("\n No |  Category  |         Name         | Price\n");
     printf("=========================================\n");
 
     for(int i = 0; i < count; i++){
