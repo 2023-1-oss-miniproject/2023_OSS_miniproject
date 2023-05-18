@@ -11,8 +11,8 @@ int selectMenu(){
     printf("2. 추가 \n");
     printf("3. 수정 \n");
     printf("4. 삭제 \n");
-    printf("0. 종료 >> \n");
-    printf("번호 선택 : __");
+    printf("0. 종료 \n");
+    printf("\n번호 선택 : ");
     scanf("%d", &menu);
     
     return menu;
@@ -34,12 +34,12 @@ int main(){
 
             qsort(d, index, sizeof(Dessert), compare);
 
-            printf("=> 추가됨!\n");
+            printf("\n=> 추가됨!\n");
         }
         else if (menu == 3){
             int num = selectDessert(d, index);
             if(num < 0){
-                printf("=> 취소됨!\n");
+                printf("\n=> 취소됨!\n");
                 continue;
             }
 
@@ -51,7 +51,7 @@ int main(){
 
             int num = selectDessert(d, index);
             if(num < 0){
-                printf("=> 취소됨!\n");
+                printf("\n=> 취소됨!\n");
                 continue;
             }
 
@@ -60,10 +60,10 @@ int main(){
                 count--;
         }
         else{
-            printf("=> 다시 선택해주세요!\n");
+            printf("\n=> 다시 선택해주세요!\n");
         }
     }
-    printf("종료됨!\n");
+    printf("\n종료됨!\n");
 
     return 0;
 }

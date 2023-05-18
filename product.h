@@ -1,5 +1,5 @@
 typedef struct{
-    char name[30];  //디저트 이름
+    char name[100];  //디저트 이름
     int price;  //디저트 가격
     int category;   //디저트의 category (0 : 음료, 1 : 케이크, 2 : 쿠키)
 } Dessert;
