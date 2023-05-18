@@ -11,6 +11,9 @@ int selectMenu(){
     printf("2. 추가 \n");
     printf("3. 수정 \n");
     printf("4. 삭제 \n");
+    printf("5. 저장 \n");
+    printf("6. 검색 \n");
+    printf("7. 계산 \n");
     printf("0. 종료 \n");
     printf("\n번호 선택 : ");
     scanf("%d", &menu);
@@ -20,6 +23,9 @@ int selectMenu(){
 int main(){
     Dessert d[100];
     int count = 0, index = 0, menu;
+
+    count = loadData(d);
+    index = count;
 
     while (1){
         menu = selectMenu();
@@ -59,6 +65,16 @@ int main(){
             if(result == 0)
                 count--;
         }
+        else if (menu == 5){
+            saveData(d, count);
+        }
+        else if (menu == 6){
+
+        }
+        else if (menu == 7){
+
+        }
+
         else{
             printf("\n=> 다시 선택해주세요!\n");
         }

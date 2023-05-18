@@ -78,7 +78,7 @@ int deleteDessert(Dessert *d){
     int request;
 
     getchar();  //버퍼 비우기
-    printf("정말로 바꾸시겠습니까?(1 : update, 0 : No update)");
+    printf("정말로 삭제하시겠습니까?(1 : update, 0 : No update)");
     scanf("%d", &request);
 
     if(request == 1){
@@ -96,7 +96,7 @@ int deleteDessert(Dessert *d){
 }  //Delete
 void listDessert(Dessert d[], int count){
     printf("\n No |  Category  |         Name         | Price\n");
-    printf("=========================================\n");
+    printf("====================================================\n");
 
     for(int i = 0; i < count; i++){
         readDessert(d[i], i);
@@ -128,4 +128,44 @@ int compare(const void *a, const void *b){
     else
         return 0;
 }//비교함수
+void saveData(Dessert d[], int count)
+{
+    FILE *fp;
+    fp = fopen("menulist.txt", "wt");
+    for(int i = 0; i < count; i++)
+    {
+        fprintf(fp, "%s %d %d\n", d[i].name, d[i].price, d[i].category);
+    }
+	
+	fclose(fp);
+	printf("저장됨!\n");
+}//저장함수
 
+int loadData(Dessert *d)
+{
+    int count = 0;
+    FILE *fp;
+    fp = fopen("menulist.txt", "rt");
+    if(fp == NULL)
+    {
+        printf("파일 불러오기 실패!, 파일이 없습니다.\n");
+        return 0;
+    }
+    printf("파일 불러오기 성공!\n");
+    while(!feof(fp))
+    {
+        char str[100];
+        fscanf(fp, "%[^1234567890]s ", str);
+        strncpy(d[count].name, str, sizeof(str)-sizeof(char));
+        fscanf(fp, "%d ", &d[count].price);
+        fscanf(fp, " %d\n", &d[count++].category);
+    }
+
+	fclose(fp);
+    if(count==0)
+    {
+        printf("불러올 목록이 없습니다.\n");
+    }
+
+    return count;
+}
