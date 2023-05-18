@@ -134,7 +134,7 @@ void saveData(Dessert d[], int count)
     fp = fopen("menulist.txt", "wt");
     for(int i = 0; i < count; i++)
     {
-        fprintf(fp, "%s/%d %d\n", d[i].name, d[i].price, d[i].category);
+        fprintf(fp, "%s %d %d\n", d[i].name, d[i].price, d[i].category);
     }
 	
 	fclose(fp);
@@ -146,12 +146,26 @@ int loadData(Dessert *d)
     int count = 0;
     FILE *fp;
     fp = fopen("menulist.txt", "rt");
+    if(fp == NULL)
+    {
+        printf("파일 불러오기 실패!, 파일이 없습니다.\n");
+        return 0;
+    }
+    printf("파일 불러오기 성공!\n");
     while(!feof(fp))
     {
-        fscanf(fp, "%s ", d[count].name);
+        char str[100];
+        fscanf(fp, "%[^1234567890]s ", str);
+        strncpy(d[count].name, str, sizeof(str)-sizeof(char));
         fscanf(fp, "%d ", &d[count].price);
         fscanf(fp, " %d\n", &d[count++].category);
     }
+
 	fclose(fp);
+    if(count==0)
+    {
+        printf("불러올 목록이 없습니다.\n");
+    }
+
     return count;
 }
