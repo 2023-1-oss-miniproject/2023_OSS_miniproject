@@ -71,9 +71,9 @@ int updateDessert(Dessert *d){
     else{
         printf("변경이 취소되었습니다.\n");
         return -1;
-    }
-
+    }   
 }  //Update
+
 int deleteDessert(Dessert *d){
     int request;
 
@@ -141,7 +141,7 @@ void saveData(Dessert d[], int count)
 	printf("저장됨!\n");
 }//저장함수
 
-int loadData(Dessert *d)
+int loadData(Dessert d[])
 {
     int count = 0;
     FILE *fp;
@@ -168,4 +168,22 @@ int loadData(Dessert *d)
     }
 
     return count;
+}
+
+void search(Dessert d[], int count)
+{
+    getchar();
+    char str[100];
+    printf("검색하실 내용을 입력해 주세요 : ");
+    scanf("%[^\n]s", str);
+    
+    printf("\n No |  Category  |         Name         | Price\n");
+    printf("====================================================\n");
+
+    for(int i = 0; i < count; i++){
+        if(strstr(d[i].name, str))
+            readDessert(d[i], i);
+    }
+    getchar();
+    
 }

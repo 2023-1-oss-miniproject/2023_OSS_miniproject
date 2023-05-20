@@ -12,4 +12,5 @@ void listDessert(Dessert d[], int count);  //List Dessert
 int selectDessert(Dessert d[], int count); //select Dessert
 int compare(const void *a, const void *b);
 void saveData(Dessert d[], int count);
-int loadData(Dessert *d);
+int loadData(Dessert d[]);
+void search(Dessert d[], int count);

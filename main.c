@@ -38,7 +38,7 @@ int main(){
             count++;
             index++;
 
-            qsort(d, index, sizeof(Dessert), compare);
+            qsort(d, count, sizeof(Dessert), compare);
 
             printf("\n=> 추가됨!\n");
         }
@@ -51,7 +51,7 @@ int main(){
 
             updateDessert(&d[num]);
 
-            qsort(d, index, sizeof(Dessert), compare);
+            qsort(d, count, sizeof(Dessert), compare);
         }
         else if (menu == 4){
 
@@ -64,12 +64,13 @@ int main(){
             int result = deleteDessert(&d[num]);
             if(result == 0)
                 count--;
+            
         }
         else if (menu == 5){
             saveData(d, count);
         }
         else if (menu == 6){
-
+            search(d, count);
         }
         else if (menu == 7){
 
