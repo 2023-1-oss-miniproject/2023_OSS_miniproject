@@ -22,6 +22,7 @@ int selectMenu(){
 }
 int main(){
     Dessert d[100];
+    memset(d, 0, sizeof(d));
     int count = 0, index = 0, menu;
 
     count = loadData(d);
@@ -73,7 +74,7 @@ int main(){
             search(d, count);
         }
         else if (menu == 7){
-
+            howMuch(d, count);
         }
 
         else{

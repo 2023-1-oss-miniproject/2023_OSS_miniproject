@@ -14,3 +14,4 @@ int compare(const void *a, const void *b);
 void saveData(Dessert d[], int count);
 int loadData(Dessert d[]);
 void search(Dessert d[], int count);
+void howMuch(Dessert d[], int count);
