@@ -11,6 +11,8 @@ Mini-Project에 대한 소개 :
 Image : 
 
 ![bread-ge037cf06f_1920](https://user-images.githubusercontent.com/130240820/236674321-02963e9e-b8a9-487d-b647-8279d9a2cb27.jpg)
+![pexels-valeriia-miller-3020919](https://github.com/2023-1-oss-miniproject/2023_OSS_miniproject/assets/130240820/f1831864-8c33-43b6-bd42-5f88a8ddf8ad)
+
 
 Project에 포함시킬 기능 설명 : 
   1. 메뉴판 출력 기능
