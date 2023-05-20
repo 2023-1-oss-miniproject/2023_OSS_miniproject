@@ -71,9 +71,9 @@ int updateDessert(Dessert *d){
     else{
         printf("변경이 취소되었습니다.\n");
         return -1;
-    }
-
+    }   
 }  //Update
+
 int deleteDessert(Dessert *d){
     int request;
 
@@ -141,7 +141,7 @@ void saveData(Dessert d[], int count)
 	printf("저장됨!\n");
 }//저장함수
 
-int loadData(Dessert *d)
+int loadData(Dessert d[])
 {
     int count = 0;
     FILE *fp;
@@ -168,4 +168,136 @@ int loadData(Dessert *d)
     }
 
     return count;
+}
+
+void search(Dessert d[], int count)
+{
+    getchar();
+    char str[100];
+    memset(str, 0, sizeof(str));
+    printf("검색하실 내용을 입력해 주세요 : ");
+    scanf("%[^\n]s", str);
+    
+    printf("\n No |  Category  |         Name         | Price\n");
+    printf("====================================================\n");
+
+    for(int i = 0; i < count; i++){
+        if(strstr(d[i].name, str))
+            readDessert(d[i], i);
+    }
+    getchar();
+    
+}
+
+void howMuch(Dessert d[], int count)
+{
+    int menuNum;
+    int n = 0;
+    int numOfDessert;
+    int price = 0;
+    Dessert newlist[100];
+
+    
+    while(1){
+        listDessert(d, count);
+        printf("\n원하는 메뉴의 번호를 선택해 주세요 : ");
+        scanf("%d", &menuNum); //범위 초과시 처리 필요
+        if(menuNum > 0 && menuNum - 1 < count){
+            break;
+        }
+        printf("유효한 입력이 아닙니다. 다시 입력해주세요\n");
+        while(getchar() != '\n');
+    }
+
+    menuNum--;
+    memcpy(&newlist[n], &d[menuNum], sizeof(d[menuNum]));
+    while(1){
+        printf("%s를/을 얼마나 주문하시겠습니까? : ", newlist[n].name);
+        scanf("%d", &numOfDessert);
+        if(numOfDessert > 0){
+            break;
+        }
+        printf("유효한 입력이 아닙니다. 다시 입력해주세요\n");
+        while(getchar() != '\n');
+    }
+
+    newlist[n++].price = numOfDessert;
+    price += d[menuNum].price*numOfDessert;
+
+    printf("현재 주문 목록");
+    printf("\n No |  Category  |         Name         | Quantity\n");
+    printf("====================================================\n");
+    for(int i = 0; i < n; i++){
+        readDessert(newlist[i], i);
+    }
+    printf("\n주문 금액 : %d\n", price);
+    while(getchar() != '\n');
+
+    char y_n;
+    while(1){
+        printf("\n더 주문 하시겠습니까?(y/n) : ");
+        scanf("%c", &y_n);
+
+        if(y_n == 'n' || y_n == 'N'){
+            printf("\n총 주문 금액은 %d원입니다.\n", price);
+            return;
+        }
+
+        else if(y_n == 'y' || y_n == 'Y'){
+            while(1){
+                listDessert(d, count);
+                printf("\n원하는 메뉴의 번호를 선택해 주세요 : ");
+                int innerMenuNum;
+                scanf("%d", &innerMenuNum); //범위 초과시 처리 필요
+                if(innerMenuNum > 0 && innerMenuNum - 1 < count){
+                    menuNum = innerMenuNum;
+                    break;
+                }
+                printf("유효한 입력이 아닙니다. 다시 입력해주세요\n");
+                while(getchar() != '\n');
+            }
+
+            menuNum--;
+
+            while(1){
+                printf("%s를/을 얼마나 주문하시겠습니까? : ", d[menuNum].name);
+                scanf("%d", &numOfDessert);
+                if(numOfDessert > 0){
+                    break;
+                }
+                printf("유효한 입력이 아닙니다. 다시 입력해주세요\n");
+                while(getchar() != '\n');
+            }
+            
+            int isContain = 0;
+            for(int i = 0; i < n; i++){
+                if(!strcmp(newlist[i].name, d[menuNum].name))
+                {
+                    newlist[i].price += numOfDessert;
+                    price += d[menuNum].price * numOfDessert;
+                    isContain = 1;
+                    continue;
+                }
+            }
+            
+            if(!isContain){
+                memcpy(&newlist[n], &d[menuNum], sizeof(d[menuNum]));
+                newlist[n++].price = numOfDessert;
+                price += d[menuNum].price * numOfDessert;
+            }
+            printf("\n현재 주문 목록");
+            printf("\n No |  Category  |         Name         | Quantity\n");
+            printf("====================================================\n");
+            for(int i = 0; i < n; i++){
+                readDessert(newlist[i], i);
+            }
+            printf("\n주문 금액 : %d\n", price);
+            while(getchar() != '\n');
+        }
+        else
+        {
+            printf("유효한 입력이 아닙니다. 다시 입력해주세요\n");
+            while(getchar() != '\n');
+        }
+    }
 }
