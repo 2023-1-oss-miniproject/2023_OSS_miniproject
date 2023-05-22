@@ -25,13 +25,13 @@ void readDessert(Dessert d, int index){
         return;
 
     if(d.category == 0){//음료
-        printf("%-4d %10s      %-25s    %d\n", index+1, "음료",d.name, d.price);
+        printf("%-4d %10s　　　　%-25s　%d\n", index+1, "음료",d.name, d.price);
     }
     else if(d.category == 1){//케이크
-        printf("%-4d  %10s      %-25s    %d\n", index+1, "케이크", d.name, d.price);
+        printf("%-4d　%10s　　　　%-25s%d\n", index+1, "케이크", d.name, d.price);
     }
     else{//쿠키
-        printf("%-4d %10s      %-25s    %d\n", index+1, "쿠키", d.name, d.price);
+        printf("%-4d %10s　　　　%-25s　%d\n", index+1, "쿠키", d.name, d.price);
     }
 
 } //Read
@@ -128,13 +128,14 @@ int compare(const void *a, const void *b){
     else
         return 0;
 }//비교함수
-void saveData(Dessert d[], int count)
+void saveData(Dessert d[], int index)
 {
     FILE *fp;
     fp = fopen("menulist.txt", "wt");
-    for(int i = 0; i < count; i++)
+    for(int i = 0; i < index; i++)
     {
-        fprintf(fp, "%s %d %d\n", d[i].name, d[i].price, d[i].category);
+        if(d[i].price > 0)
+            fprintf(fp, "%s %d %d\n", d[i].name, d[i].price, d[i].category);
     }
 	
 	fclose(fp);
@@ -170,7 +171,7 @@ int loadData(Dessert d[])
     return count;
 }
 
-void search(Dessert d[], int count)
+void search(Dessert d[], int index)
 {
     getchar();
     char str[100];
@@ -181,15 +182,15 @@ void search(Dessert d[], int count)
     printf("\n No |  Category  |         Name         | Price\n");
     printf("====================================================\n");
 
-    for(int i = 0; i < count; i++){
-        if(strstr(d[i].name, str))
+    for(int i = 0; i < index; i++){
+        if(strstr(d[i].name, str) && d[i].price >= 0)
             readDessert(d[i], i);
     }
     getchar();
     
 }
 
-void howMuch(Dessert d[], int count)
+void howMuch(Dessert d[], int index)
 {
     int menuNum;
     int n = 0;
@@ -199,10 +200,10 @@ void howMuch(Dessert d[], int count)
 
     
     while(1){
-        listDessert(d, count);
+        listDessert(d, index);
         printf("\n원하는 메뉴의 번호를 선택해 주세요 : ");
-        scanf("%d", &menuNum); //범위 초과시 처리 필요
-        if(menuNum > 0 && menuNum - 1 < count){
+        scanf("%d", &menuNum);
+        if(menuNum > 0 && menuNum - 1 < index && d[menuNum-1].price > 0){
             break;
         }
         printf("유효한 입력이 아닙니다. 다시 입력해주세요\n");
@@ -245,11 +246,11 @@ void howMuch(Dessert d[], int count)
 
         else if(y_n == 'y' || y_n == 'Y'){
             while(1){
-                listDessert(d, count);
+                listDessert(d, index);
                 printf("\n원하는 메뉴의 번호를 선택해 주세요 : ");
                 int innerMenuNum;
                 scanf("%d", &innerMenuNum); //범위 초과시 처리 필요
-                if(innerMenuNum > 0 && innerMenuNum - 1 < count){
+                if(innerMenuNum > 0 && innerMenuNum - 1 < index && d[menuNum-1].price > 0){
                     menuNum = innerMenuNum;
                     break;
                 }

@@ -11,7 +11,7 @@ int deleteDessert(Dessert *d);  //Delete
 void listDessert(Dessert d[], int count);  //List Dessert
 int selectDessert(Dessert d[], int count); //select Dessert
 int compare(const void *a, const void *b);
-void saveData(Dessert d[], int count);
+void saveData(Dessert d[], int index);
 int loadData(Dessert d[]);
-void search(Dessert d[], int count);
-void howMuch(Dessert d[], int count);
+void search(Dessert d[], int index);
+void howMuch(Dessert d[], int index);
