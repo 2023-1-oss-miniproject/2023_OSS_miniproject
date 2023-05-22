@@ -25,13 +25,13 @@ void readDessert(Dessert d, int index){
         return;
 
     if(d.category == 0){//음료
-        printf("%-4d %10s      %-25s    %d\n", index+1, "음료",d.name, d.price);
+        printf("%-4d %10s　　　　%-25s　%d\n", index+1, "음료",d.name, d.price);
     }
     else if(d.category == 1){//케이크
-        printf("%-4d  %10s      %-25s    %d\n", index+1, "케이크", d.name, d.price);
+        printf("%-4d　%10s　　　　%-25s%d\n", index+1, "케이크", d.name, d.price);
     }
     else{//쿠키
-        printf("%-4d %10s      %-25s    %d\n", index+1, "쿠키", d.name, d.price);
+        printf("%-4d %10s　　　　%-25s　%d\n", index+1, "쿠키", d.name, d.price);
     }
 
 } //Read
