@@ -32,6 +32,10 @@ int main(){
         menu = selectMenu();
         if (menu == 0) break;
         if (menu == 1){//조회
+            if(count < 1){
+                printf("=> 조회 가능한 메뉴가 없습니다.\n");
+                continue;
+            }
             listDessert(d, index);
         }
         else if (menu == 2){//추가
@@ -44,6 +48,10 @@ int main(){
             printf("\n=> 추가됨!\n");
         }
         else if (menu == 3){
+            if(count < 1){
+                printf("=> 수정 가능한 메뉴가 없습니다.\n");
+                continue;
+            }
             int num = selectDessert(d, index);
             if(num < 0){
                 printf("\n=> 취소됨!\n");
@@ -55,7 +63,10 @@ int main(){
             qsort(d, count, sizeof(Dessert), compare);
         }
         else if (menu == 4){
-
+            if(count < 1){
+                printf("=> 삭제 가능한 메뉴가 없습니다.\n");
+                continue;
+            }
             int num = selectDessert(d, index);
             if(num < 0){
                 printf("\n=> 취소됨!\n");
@@ -69,12 +80,24 @@ int main(){
         }
         else if (menu == 5){
             saveData(d, index);
+            if(count < 1){
+                printf("=> 저장 가능한 메뉴가 없습니다.\n");
+                continue;
+            }
+            saveData(d, count);
         }
         else if (menu == 6){
             search(d, index);
         }
         else if (menu == 7){
             howMuch(d, index);
+
+            if(count < 1){
+                printf("=> 계산 가능한 메뉴가 존재하지 않습니다. 죄송합니다\n");
+                continue;
+            }
+            howMuch(d, count);
+
         }
 
         else{
