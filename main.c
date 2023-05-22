@@ -68,13 +68,13 @@ int main(){
             
         }
         else if (menu == 5){
-            saveData(d, count);
+            saveData(d, index);
         }
         else if (menu == 6){
-            search(d, count);
+            search(d, index);
         }
         else if (menu == 7){
-            howMuch(d, count);
+            howMuch(d, index);
         }
 
         else{
